@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*.$py.class
+
+# Entornos virtuales
+env/
+venv/
+venv*/
+ENV/
+.env
+.venv
+
+# Archivos temporales / logs
+*.log
+*.pot
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+
+# Directorios de configuración
+*.idea/
+*.vscode/
+
+# Django
+*.db
+media/
+staticfiles/
+static/
+local_settings.py
+
+# Archivos compilados
+*.so
+
+# Distribución
+build/
+dist/
+*.egg-info/
+
+# Configuración OS
+.DS_Store
+Thumbs.db
