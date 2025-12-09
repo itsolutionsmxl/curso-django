@@ -1,7 +1,15 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseNotFound
 
 # Create your views here.
 
-def index(request):
-    return HttpResponse("Hola mundo desde Django")
+def days_week(request, day):
+    quote_text = None
+    if day == "monday":
+        quote_text = "Pienso, luego existo"
+    elif day == "tuestday":
+        quote_text = "La vida es un sueño"
+    else:
+        return HttpResponseNotFound("No hay frase para este dia.")
+    
+    return HttpResponse(quote_text)
