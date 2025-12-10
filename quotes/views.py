@@ -1,15 +1,32 @@
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseNotFound
+from django.http import HttpResponse, HttpResponseNotFound, HttpResponseRedirect
+from django.urls import reverse
 
 # Create your views here.
 
+days_of_week = {
+    "monday" : "Pienso, luego existo",
+    "tuesday": "La vida es un sueño",
+    "wednesdar": "El conocimineto es porder",
+    "thursday": "Sé el cambio que quieres ver",
+    "friday": "Solo sé que no sé nada",
+    "saturday": "Vive como si fuera la últimu día",
+    "sunday": "Da un poquito más todos los días"
+}
+
+def days_week_with_number(request, day):
+    days = list(days_of_week.keys())
+    if day > len(days):
+        return HttpResponseNotFound("El día no existe")
+    redirect_day = days[day-1]
+    redirect_path = reverse("day-quote", args=[redirect_day])
+    return HttpResponseRedirect(redirect_path)
+
 def days_week(request, day):
-    quote_text = None
-    if day == "monday":
-        quote_text = "Pienso, luego existo"
-    elif day == "tuestday":
-        quote_text = "La vida es un sueño"
-    else:
-        return HttpResponseNotFound("No hay frase para este dia.")
+    try:
+        quote_text = days_of_week[day]
+        return HttpResponse(quote_text)
+    except:
+        return HttpResponseNotFound("No hay frase para este día.")
     
-    return HttpResponse(quote_text)
+    
