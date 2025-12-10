@@ -7,12 +7,22 @@ from django.urls import reverse
 days_of_week = {
     "monday" : "Pienso, luego existo",
     "tuesday": "La vida es un sueño",
-    "wednesdar": "El conocimineto es porder",
+    "wednesday": "El conocimineto es porder",
     "thursday": "Sé el cambio que quieres ver",
     "friday": "Solo sé que no sé nada",
     "saturday": "Vive como si fuera la últimu día",
     "sunday": "Da un poquito más todos los días"
 }
+
+def index(request):
+    list_items = ""
+    days = list(days_of_week.keys())
+    for day in days:
+        day_path = reverse("day-quote", args=[day])
+        list_items += f"<li><a href=\"{day_path}\">{day}</a></li>"
+    
+    response_html = f"<ul>{list_items}</ul>"
+    return HttpResponse(response_html)
 
 def days_week_with_number(request, day):
     days = list(days_of_week.keys())
